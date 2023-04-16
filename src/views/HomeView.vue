@@ -1,29 +1,48 @@
-<script>
+<script setup>
 import apiCallJson from '../services/ApiJson.js';
+import { ref , onBeforeMount , computed } from 'vue';
+import FilterUser from "../components/FilterUser.vue";
 
 
-export default {
-  data() {
-    return {
-      users: []
-    }
-  },
-  methods: {
-    async fetchAllUsers() {
-      const myApiCall = new apiCallJson();
-      await myApiCall.fetchAllRequest();
-      this.users = myApiCall.getRequest();
-    }
-  }
-}
+const api = new apiCallJson();
+const users = ref([]);
+const filterSearch = ref("");
+
+
+ onBeforeMount(async () =>{
+
+  await api.fetchAllRequest();
+  users.value = api.getRequest();
+
+ });
+
+
+//  const filterUsers = computed (() => {
+//   if(!filterUsers.value) return users.value;
+//   return users.value.filter(
+//     (user) =>
+//     user 
+//   )
+//  })
+
+
 
 </script>
 
 <template>
  <div>
-    <button @click="fetchAllUsers">Fetch All Users</button>
-    <ul>
-      <li v-for="user in users" :key="user.id">{{ user.name }}</li>
-    </ul>
+
+ 
+  
+
+
+
+   
+    
+    
   </div>
 </template>
+
+<!-- <ul>
+  <li v-for="user in users" :key="user.id">{{ user.name }}</li>
+</ul> -->
