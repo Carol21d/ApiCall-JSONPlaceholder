@@ -1,46 +1,44 @@
 <script setup>
 import apiCallJson from '../services/ApiJson.js';
-import { ref , onBeforeMount , computed } from 'vue';
+import { ref, onBeforeMount, computed } from 'vue';
 import FilterUser from "../components/FilterUser.vue";
+import User from '../components/User.vue';
 
 
 const api = new apiCallJson();
-const users = ref([]);
+const user = ref([]);
 const filterSearch = ref("");
 
 
- onBeforeMount(async () =>{
+onBeforeMount(async () => {
 
   await api.fetchAllRequest();
-  users.value = api.getRequest();
+  user.value = api.getRequest();
 
- });
+});
 
 
-//  const filterUsers = computed (() => {
-//   if(!filterUsers.value) return users.value;
-//   return users.value.filter(
-//     (user) =>
-//     user 
-//   )
-//  })
+const filterUsers = computed(() => {
+  if (!filterUsers.value) return user.value;
+  return user.value.filter(
+    (u) =>
+    //filter by name 
+      u.name.toLowerCase().includes(filterSearch.value.toLowerCase()) ||
+      //filter by id colocamos toString para que el numero lo pase a un string
+      u.id.toString().toLowerCase().includes(filterSearch.value.toLowerCase())
 
+
+  )
+});
 
 
 </script>
 
 <template>
- <div>
-
- 
-  
-
-
-
-   
-    
-    
-  </div>
+  <main>
+  <FilterUser v-model="filterSearch" />
+  <User v-for="user in filterUsers" :user="user" :key="user.id"/>
+  </main>
 </template>
 
 <!-- <ul>

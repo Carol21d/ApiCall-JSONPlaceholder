@@ -18,10 +18,12 @@ const props = defineProps({
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users" :key="user.id"></tr>
-                <th>{{ user.id }}</th>
-                <th>{{ user.name }}</th>
-                <th>{{ user.city }}</th>
+               <tr>
+                   <th>{{ user.id }}</th>
+                   <th>{{ user.name }}</th>
+                   <th>{{ user.city }}</th>
+                   
+               </tr>
             </tbody>
 
         </table>
