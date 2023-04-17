@@ -21,7 +21,7 @@ const props = defineProps({
                <tr>
                    <th>{{ user.id }}</th>
                    <th>{{ user.name }}</th>
-                   <th>{{ user.city }}</th>
+                   <th>{{ user.address.city }}</th>
                    
                </tr>
             </tbody>
